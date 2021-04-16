@@ -338,6 +338,42 @@ namespace BulletHell
                 kvp.Value.ReleaseBuffers(true);
             }
         }
+
+        public void clearAllProjectiles()
+        {
+            for (int n = 0; n < EmittersArray.Length; n++)
+            {
+                if (EmittersArray[n] != null)
+                {
+                    // if the gameobject was disabled then clear all projectiles from this emitter
+                    EmittersArray[n].ClearAllProjectiles();
+                }
+            }
+        }
+
+        public void StartEmitters()
+        {
+            for (int n = 0; n < EmittersArray.Length; n++)
+            {
+                if (EmittersArray[n] != null)
+                {
+                    // if the gameobject was disabled then clear all projectiles from this emitter
+                    EmittersArray[n].isStopped = false;
+                }
+            }
+        }
+
+        public void ClearEmitters()
+        {
+            for (int n = 0; n < EmittersArray.Length; n++)
+            {
+                if (EmittersArray[n] != null)
+                {
+                    // if the gameobject was disabled then clear all projectiles from this emitter
+                    EmittersArray[n] = null;
+                }
+            }
+        }
     }
 
     public class ProjectileTypeCounters

@@ -11,7 +11,7 @@ Material:
   m_Shader: {fileID: 4800000, guid: 18e30b6bf63afa143b99ce9d0ccbb5f9, type: 3}
   m_ShaderKeywords: _GLOSSYREFLECTIONS_OFF _SPECULARHIGHLIGHTS_OFF
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
+  m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -98,6 +98,7 @@ Material:
     - _SrcBlend: 1
     - _StaticColor: 0
     - _UVSec: 0
+    - _ZIndex: 0.01
     - _ZWrite: 1
     m_Colors:
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
@@ -108,3 +109,4 @@ Material:
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  m_BuildTextureStacks: []

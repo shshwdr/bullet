@@ -12,7 +12,7 @@ namespace BulletHell
     public abstract class ProjectileEmitterBase : MonoBehaviour
     {
         protected float Interval;
-
+        public bool isStopped;
         // Each emitter has its own ProjectileData pool
         protected Pool<ProjectileData> Projectiles;
         protected Pool<ProjectileData> ProjectileOutlines;
@@ -52,7 +52,7 @@ namespace BulletHell
         public int ActiveOutlineCount { get; protected set; }
 
         // Collision layer
-        protected int LayerMask = 1;
+        protected int lm = 1;
         protected RaycastHit2D[] RaycastHitBuffer = new RaycastHit2D[1];
 
         // For cull check
@@ -75,7 +75,7 @@ namespace BulletHell
             
             ContactFilter = new ContactFilter2D
             {
-                layerMask = LayerMask,
+                layerMask = lm,
                 useTriggers = false,
             };
 
@@ -84,6 +84,7 @@ namespace BulletHell
             // If projectile type is not set, use default
             if (ProjectilePrefab == null)
                 ProjectilePrefab = ProjectileManager.Instance.GetProjectilePrefab(0);
+            isStopped = true;
         }
 
         public void Initialize(int size)
@@ -100,6 +101,10 @@ namespace BulletHell
 
         public void UpdateEmitter(float tick)
         {
+            if (isStopped)
+            {
+                return;
+            }
             if (AutoFire)
             {
                 Interval -= tick;
@@ -131,12 +136,12 @@ namespace BulletHell
                 Timer += tick;
 
                 // fixed timestep timer internal loop
-                while (Timer > FixedTimestepRate)
+                //while (Timer > FixedTimestepRate)
                 {
                     Timer -= FixedTimestepRate;
-                    UpdateProjectiles(FixedTimestepRate);   // Must call UpdateProjectiles before firing new projectiles
+                    UpdateProjectiles(tick);   // Must call UpdateProjectiles before firing new projectiles
 
-                    if (AutoFire)
+                    if (AutoFire&& !isStopped)
                     {
                         while (ProjectilesWaiting > 0)
                         {

@@ -373,6 +373,17 @@ namespace BulletHell
                         }
                         else
                         {
+
+                            //check result
+                            
+                            LayerMask mask = LayerMask.GetMask("Player");
+                            var result2 = Physics2D.CircleCast(node.Item.Position, radius, deltaPosition, distance, mask,-10000);
+                            //var result2 = Physics2D.CircleCast(node.Item.Position, radius, deltaPosition, ContactFilter, RaycastHitBuffer, distance);
+
+                            if(result2)
+                            {
+                                result2.collider.GetComponentInParent<HPCharacterController>().getDamage(1);
+                            }
                             ReturnNode(node);
                         }
                     }

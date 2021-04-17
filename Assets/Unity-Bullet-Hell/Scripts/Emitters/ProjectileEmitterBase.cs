@@ -34,6 +34,7 @@ namespace BulletHell
         public bool BounceOffSurfaces = true;        
         public bool CullProjectilesOutsideCameraBounds = true;
         public bool IsFixedTimestep = true;
+        public bool shootAtBeginning = true;
         [ConditionalField(nameof(IsFixedTimestep)), Range(0.01f, 0.02f)] public float FixedTimestepRate = 0.01f;      
 
         [Foldout("Outline", true)]
@@ -85,6 +86,11 @@ namespace BulletHell
             if (ProjectilePrefab == null)
                 ProjectilePrefab = ProjectileManager.Instance.GetProjectilePrefab(0);
             isStopped = true;
+
+            if (shootAtBeginning)
+            {
+                Interval = 0;
+            }
         }
 
         public void Initialize(int size)

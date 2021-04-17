@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    int levelTargetValue;
-    public string levelName;
+    public int levelTargetValue;
+    [HideInInspector] public string levelName;
 
 
     protected HUD hud;
+
 
     public  float levelTime = 10f;
     [HideInInspector] public float currentTime = 0f;
@@ -54,5 +55,24 @@ public class LevelManager : MonoBehaviour
         GameManager.Instance.FailedLevel();
     }
 
+    protected virtual void timeFinished()
+    {
+        failedLevel();
+    }
+    void Update()
+    {
+        if (startTime)
+        {
+            currentTime -= Time.timeScale * Time.deltaTime;
+            currentTime = Mathf.Max(0, currentTime);
+            if (currentTime <= 0)
+            {
+                //win
+                timeFinished();
+                //player.getDamage(1);
+            }
+            hud.updateTimer(currentTime);
+        }
+    }
 
 }

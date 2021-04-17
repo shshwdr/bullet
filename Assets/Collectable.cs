@@ -22,6 +22,7 @@ public class Collectable : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             CollectionGeneration.Instance.generate();
+            CollectionGeneration.Instance.collect();
             Destroy(gameObject);
         }
     }

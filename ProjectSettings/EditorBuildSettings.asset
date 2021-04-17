@@ -11,4 +11,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/survive.unity
     guid: 1377ed12103aef54cb5d1f350ed6b0d6
+  - enabled: 1
+    path: Assets/Scenes/collect.unity
+    guid: e9e0d0ff9affa824f92f345d32e6ef18
+  - enabled: 1
+    path: Assets/Scenes/killEnemy.unity
+    guid: 0bf4d01ebf7e3544ebe723414a95737a
+  - enabled: 1
+    path: Assets/Scenes/mirror.unity
+    guid: 032830fb2bbdaf14295347b83c041ac5
+  - enabled: 1
+    path: Assets/Scenes/multiplePlayer.unity
+    guid: f81153ef993bd6746a07cc81b724281c
+  - enabled: 1
+    path: Assets/Scenes/findEnemy.unity
+    guid: 231b8addabadac94b9da32ccd5b0b96e
   m_configObjects: {}

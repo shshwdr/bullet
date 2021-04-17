@@ -14,19 +14,8 @@ public class SurviveLevelManager : LevelManager
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void timeFinished()
     {
-        if (startTime)
-        {
-            currentTime -= Time.timeScale * Time.deltaTime;
-            currentTime = Mathf.Max(0, currentTime);
-            if (currentTime <= 0)
-            {
-                //win
-                succeedLevel();
-                //player.getDamage(1);
-            }
-            hud.updateTimer(currentTime);
-        }
+        succeedLevel();
     }
 }

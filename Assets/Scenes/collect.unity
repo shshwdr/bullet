@@ -329,12 +329,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 112350383}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e2f0bc076a68b041840f5feec303ffa, type: 3}
+  m_Script: {fileID: 11500000, guid: b62c0e891ad5d62459017ff960dc8473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelTargetValue: 0
+  levelTargetValue: 2
   levelName: 
-  levelTime: 2
+  levelTime: 5
   currentTime: 0
   player: {fileID: 0}
 --- !u!4 &112350385
@@ -1090,6 +1090,7 @@ MonoBehaviour:
   BounceOffSurfaces: 0
   CullProjectilesOutsideCameraBounds: 0
   IsFixedTimestep: 1
+  shootAtBeginning: 1
   FixedTimestepRate: 0.01
   DrawOutlines: 0
   OutlineSize: 0
@@ -2029,7 +2030,7 @@ PrefabInstance:
     - target: {fileID: 1827217091192896266, guid: 6f4fda8808d854a44a7a910aa05f76bb,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1827217091192896269, guid: 6f4fda8808d854a44a7a910aa05f76bb,
         type: 3}
@@ -2169,6 +2170,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 25672645, guid: ffba1352bd7c8ca41b6aee5c0fcb08ef, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4555001326286499618, guid: ffba1352bd7c8ca41b6aee5c0fcb08ef,
         type: 3}
       propertyPath: m_Name

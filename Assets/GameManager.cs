@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum GameMode { survive,collect}
+public enum GameMode { survive,collect,killEnemy, mirror}
 public class GameManager : Singleton<GameManager>
 {
 
@@ -15,6 +15,7 @@ public class GameManager : Singleton<GameManager>
     public DSPlayerController player;
     public LevelManager currentLevel;
     public bool success;
+    public bool finishedLevel;
 
     int successedLevel = 0;
     // Start is called before the first frame update
@@ -34,11 +35,6 @@ public class GameManager : Singleton<GameManager>
         SelectLevelAndStart();
     }
 
-    IEnumerator reload()
-    {
-        yield return new WaitForSeconds(1f);
-        SelectLevelAndStart();
-    }
 
     private void OnDestroy()
     {
@@ -51,17 +47,35 @@ public class GameManager : Singleton<GameManager>
         score = 0;
         successedLevel = 0;
         SelectLevelAndStart();
-
-        HUD.Instance.updateHealth(playerHealth);
+        finishedLevel = true;
+        HUD.Instance.updateHealth(currentPlayerHealth);
         HUD.Instance.updateScore(score);
     }
 
     public void SelectLevelAndStart()
     {
 
-        gameMode = GameMode.survive;
+        //if (gameMode == GameMode.survive)
+        {
+
+            gameMode = GameMode.killEnemy;
+        }
+        //else
+        {
+
+           // gameMode = GameMode.collect;
+        }
         SceneManager.LoadScene((int)gameMode + 1);
+
+        GameEventMessage.SendEvent("LevelStart");
+        //finishedInterval();
     }
+
+    public void finishedInterval()
+    {
+        finishedLevel = false;
+    }
+
 
     public void StartLevelMove()
     {
@@ -70,7 +84,10 @@ public class GameManager : Singleton<GameManager>
 
     public void SucceedLevel()
     {
-
+        if (finishedLevel)
+        {
+            return;
+        }
         successedLevel++;
         score += 1;
         HUD.Instance.updateScore(score);
@@ -83,11 +100,15 @@ public class GameManager : Singleton<GameManager>
 
     public void FailedLevel()
     {
-        playerHealth -= 1;
-        HUD.Instance.updateHealth(playerHealth);
+        if (finishedLevel)
+        {
+            return;
+        }
+        currentPlayerHealth -= 1;
+        HUD.Instance.updateHealth(currentPlayerHealth);
 
         success = false;
-        if (playerHealth == 0)
+        if (currentPlayerHealth == 0)
         {
             Debug.Log("gameover");
             GameEventMessage.SendEvent("gameover");
@@ -105,6 +126,7 @@ public class GameManager : Singleton<GameManager>
     public virtual void finishLevel()
     {
         //yield some time
+        finishedLevel = true;
         BulletHell.ProjectileManager.Instance.ClearEmitters();
         HUD.Instance.updateIntervalLevel();
     }

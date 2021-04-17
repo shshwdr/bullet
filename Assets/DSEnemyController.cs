@@ -27,8 +27,13 @@ public class DSEnemyController : HPCharacterController
     protected override void Die()
     {
         base.Die();
-        //Destroy(gameObject);
-        GetComponent<BulletHell.ProjectileEmitterBase>().isStopped = true;
+        Destroy(gameObject);
+        //GetComponent<BulletHell.ProjectileEmitterBase>().isStopped = true;
+        if(GameManager.Instance.currentLevel is killEnemyLevelManager)
+        {
+            CollectionGeneration.Instance.generate();
+            CollectionGeneration.Instance.collect();
+        }
     }
 
     // Update is called once per frame

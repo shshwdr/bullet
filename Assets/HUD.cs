@@ -16,6 +16,7 @@ public class HUD : Singleton<HUD>
     public LevelManager levelManager;
 
     [SerializeField] TMP_Text intervalLabel;
+    [SerializeField] TMP_Text intervalAfterLabel;
     // Start is called before the first frame update
     void Start()
     {
@@ -80,6 +81,7 @@ public class HUD : Singleton<HUD>
         if (targetLabel)
         {
             targetLabel.text = target;
+            intervalAfterLabel.text = target;
 
         }
         else

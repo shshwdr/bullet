@@ -312,7 +312,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 112350385}
-  - component: {fileID: 112350384}
+  - component: {fileID: 112350386}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -320,23 +320,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &112350384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 112350383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e2f0bc076a68b041840f5feec303ffa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelTargetValue: 0
-  levelName: 
-  levelTime: 2
-  currentTime: 0
-  player: {fileID: 0}
 --- !u!4 &112350385
 Transform:
   m_ObjectHideFlags: 0
@@ -351,6 +334,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &112350386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112350383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a0d8625dff044340a29b436c409d7e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelTargetValue: 2
+  levelName: 
+  levelTime: 7
+  currentTime: 0
+  player: {fileID: 0}
 --- !u!4 &334560171 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4116700794453242096, guid: abbb1d180e50df14da03aa479034d459,
@@ -1707,7 +1707,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1675416009}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -2029,8 +2029,14 @@ PrefabInstance:
     - target: {fileID: 1827217091192896266, guid: 6f4fda8808d854a44a7a910aa05f76bb,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1827217091192896268, guid: 6f4fda8808d854a44a7a910aa05f76bb,
+        type: 3}
+      propertyPath: collectionItem
+      value: 
+      objectReference: {fileID: 261343608048200664, guid: 97e63f63fb6c4bd4a885982d6cc62aee,
+        type: 3}
     - target: {fileID: 1827217091192896269, guid: 6f4fda8808d854a44a7a910aa05f76bb,
         type: 3}
       propertyPath: m_RootOrder

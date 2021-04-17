@@ -30,7 +30,7 @@ MonoBehaviour:
   DebugSoundyManager: 0
   DebugSoundyPooler: 0
   DebugTouchDetector: 0
-  DebugUIButton: 1
+  DebugUIButton: 0
   DebugUIButtonListener: 0
   DebugUICanvas: 0
   DebugUIDrawer: 0
@@ -53,5 +53,5 @@ MonoBehaviour:
   UseOrientationDetector: 0
   UsePlaymaker: 0
   UseTextMeshPro: 0
-  AssetDatabaseSaveAssetsNeeded: 1
+  AssetDatabaseSaveAssetsNeeded: 0
   AssetDatabaseRefreshNeeded: 0

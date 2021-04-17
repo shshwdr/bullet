@@ -16,6 +16,10 @@ public class DSPlayerController : HPCharacterController
     Rigidbody2D rb; 
     Sequence sequence;
 
+    public bool isMirrorPlayer;
+
+    public Transform arrow;
+
     Vector3 originPosition;
     [HideInInspector] public LevelManager levelManager;
     // Start is called before the first frame update
@@ -23,8 +27,12 @@ public class DSPlayerController : HPCharacterController
     {
         rb = GetComponent<Rigidbody2D>();
         originPosition = transform.position;
-        HUD.Instance.player = this;
-        GameManager.Instance.player = this;
+        if (!isMirrorPlayer)
+        {
+
+            HUD.Instance.player = this;
+            GameManager.Instance.player = this;
+        }
     }
     protected override void Die()
     {
@@ -32,7 +40,7 @@ public class DSPlayerController : HPCharacterController
 
         Time.timeScale = 0;
         sequence.Kill();
-        rb.velocity = Vector3.zero;
+        clearVelocity();
 
         GameManager.Instance.FailedLevel();
 
@@ -58,26 +66,39 @@ public class DSPlayerController : HPCharacterController
         hp = 1;
         isDead = false;
     }
-    Vector3 getMouseDirection()
+    public Vector3 getMouseDirection()
     {
+        if (isMirrorPlayer)
+        {
+            return -GameManager.Instance.player.getMouseDirection();
+        }
         var target = Input.mousePosition;
         target = Camera.main.ScreenToWorldPoint(target);
         var dir = (target - transform.position);
         dir = new Vector3(dir.x, dir.y, 0).normalized;
         return dir;
     }
+
+    void clearVelocity()
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = 0;
+        rb.Sleep();
+    }
     // Update is called once per frame
     void Update()
     {
-        if (isDead)
+        if (isDead || GameManager.Instance. finishedLevel)
         {
             return;
         }
+        arrow.up = getMouseDirection();
+
         if (Input.GetMouseButtonDown(0))
         {
             Time.timeScale = 1;
             sequence.Kill();
-            rb.velocity = Vector3.zero;
+            clearVelocity();
 
 
             var dir = getMouseDirection() * moveDistance;
@@ -94,7 +115,7 @@ public class DSPlayerController : HPCharacterController
         {
             Time.timeScale = 1;
             sequence.Kill();
-            rb.velocity = Vector3.zero;
+            clearVelocity();
             //add back force?
             var bullet = PoolsManager.Instance.bulletManager.getItem();
             bullet.SetActive(true);
@@ -126,5 +147,13 @@ public class DSPlayerController : HPCharacterController
     private void LateUpdate()
     {
         Time.fixedDeltaTime = Time.timeScale * 0.01f;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Player" && GameManager.Instance.currentLevel is PairLevelManager)
+        {
+            ((PairLevelManager)GameManager.Instance.currentLevel).pair();
+        }
     }
 }
